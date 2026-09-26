@@ -14,10 +14,12 @@ COPY app.py .
 COPY templates ./templates
 
 # 把模型放进去（见下方说明）
-RUN mkdir -p /root/.u2net && \
+
+RUN apt-get update && apt-get install -y --no-install-recommends wget && \
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir -p /root/.u2net && \
     wget -O /root/.u2net/u2net.onnx \
     https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net.onnx
-
 
 EXPOSE 5000
 
